@@ -45,30 +45,21 @@ def deduplicate_and_save(args):
 
         for row in tqdm(reader, desc="Processing rows"):
             
-            # Ensure the row has the 'text' field
             if len(row) >= 2:
                 doc_id = row[0]
                 text = row[1]
                 
-                # Generate the hash for the text field
                 doc_hash = Simhash(get_features(text))
                 
-                # Query the index for near-duplicates
                 dups = index.get_near_dups(doc_hash)
                 
                 if len(dups) == 0:
-                    # --- This is a UNIQUE item ---
-                    # 1. Add its hash to the index
                     index.add(doc_id, doc_hash)
-                    # 2. Write the original row to the new file
                     writer.writerow(row)
                     saved_count += 1
                 else:
-                    # --- This is a DUPLICATE ---
-                    # Do not add to index, do not write to file
                     dupe_count += 1
             else:
-                # Row is malformed (e.g., missing columns)
                 malformed_count += 1
 
     print("\n--- Deduplication Complete ---")
