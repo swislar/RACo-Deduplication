@@ -60,6 +60,11 @@ Retrieval Augmentation for Commonsense Reasoning: A Unified Approach [arXiv](htt
 
 4.  Evaluate: Retrieved Documents
 
+## Poster
+
+![Poster](https://raw.githubusercontent.com/swislar/RACo-Deduplication/refs/heads/main/assets/04-RAG_Info_Deduplication.jpg)
+
+
 ## References:
 
 https://github.com/wyu97/RACo
